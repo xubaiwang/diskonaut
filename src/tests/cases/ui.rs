@@ -1,5 +1,5 @@
 use ::std::env;
-use ::std::fs::{create_dir, create_dir_all, remove_dir_all, File};
+use ::std::fs::{File, create_dir, create_dir_all, remove_dir_all};
 use ::std::io::prelude::*;
 use ::std::iter;
 use ::std::path::{Path, PathBuf};
@@ -43,7 +43,7 @@ const SHOW_APPARENT_SIZE: bool = true;
 const DELETE_CONFIRMATION_ENABLED: bool = false;
 const DELETE_CONFIRMATION_DISABLED: bool = true;
 
-fn create_root_temp_dir(name: &str) -> Result<PathBuf, failure::Error> {
+fn create_root_temp_dir(name: &str) -> anyhow::Result<PathBuf> {
     let mut dir = PathBuf::new();
     dir.push(String::from("/tmp/diskonaut_tests")); // TODO: fix this for other platforms
     dir.push(name.to_string());
@@ -53,7 +53,7 @@ fn create_root_temp_dir(name: &str) -> Result<PathBuf, failure::Error> {
     Ok(dir)
 }
 
-fn create_temp_file<P: AsRef<Path>>(path: P, size: usize) -> Result<(), failure::Error> {
+fn create_temp_file<P: AsRef<Path>>(path: P, size: usize) -> anyhow::Result<()> {
     let mut file = File::create(path)?;
     let mut pos = 0;
     while pos < size {
