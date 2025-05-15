@@ -1,5 +1,8 @@
-use ::std::thread::park_timeout;
-use ::std::time;
+use std::{
+    sync::mpsc::{Receiver, SyncSender},
+    thread::park_timeout,
+    time,
+};
 
 use crate::messages::Instruction;
 
@@ -8,8 +11,6 @@ pub enum Event {
     FileDeleted,
     AppExit,
 }
-
-use std::sync::mpsc::{Receiver, SyncSender};
 
 pub fn handle_events(event_receiver: Receiver<Event>, instruction_sender: SyncSender<Instruction>) {
     loop {

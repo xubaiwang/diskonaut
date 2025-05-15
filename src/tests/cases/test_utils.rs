@@ -1,7 +1,9 @@
-use ::std::iter;
-use ::std::sync::{Arc, Mutex};
-use crossterm::event::KeyModifiers;
-use crossterm::event::{Event, KeyCode, KeyEvent};
+use std::{
+    iter,
+    sync::{Arc, Mutex},
+};
+
+use crossterm::event::{Event, KeyCode, KeyEvent, KeyModifiers};
 
 use crate::tests::fakes::{TerminalEvent, TerminalEvents, TestBackend};
 
@@ -27,7 +29,8 @@ macro_rules! key {
 }
 
 pub fn sleep_and_quit_events(sleep_num: usize, quit_after_confirm: bool) -> Box<TerminalEvents> {
-    let mut events: Vec<Option<Event>> = iter::repeat(None).take(sleep_num).collect();
+    let collect = iter::repeat(None).take(sleep_num).collect();
+    let mut events: Vec<Option<Event>> = collect;
     events.push(Some(key!(ctrl 'c')));
     if quit_after_confirm {
         events.push(None);

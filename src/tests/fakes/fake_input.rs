@@ -1,4 +1,5 @@
-use ::std::{thread, time};
+use std::{thread, time};
+
 use crossterm::event::Event;
 
 pub struct TerminalEvents {

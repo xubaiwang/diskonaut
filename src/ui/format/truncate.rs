@@ -1,5 +1,6 @@
-use ::std::iter::FromIterator;
-use ::unicode_width::UnicodeWidthChar;
+use std::iter::FromIterator;
+
+use unicode_width::UnicodeWidthChar;
 
 fn truncate_iter_to_unicode_width<Input, Collect>(iter: Input, width: usize) -> Collect
 where

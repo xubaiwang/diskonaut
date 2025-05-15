@@ -1,11 +1,17 @@
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
-use ::unicode_width::UnicodeWidthStr;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+};
+use unicode_width::UnicodeWidthStr;
 
-use crate::state::tiles::{FileType, Tile};
-use crate::ui::format::{truncate_middle, DisplaySize, DisplaySizeRounded};
-use crate::ui::grid::{boundaries, draw_next_symbol};
+use crate::{
+    state::tiles::{FileType, Tile},
+    ui::{
+        format::{DisplaySize, DisplaySizeRounded, truncate_middle},
+        grid::{boundaries, draw_next_symbol},
+    },
+};
 
 fn tile_first_line(tile: &Tile) -> String {
     let max_text_length = if tile.width > 2 { tile.width - 2 } else { 0 };

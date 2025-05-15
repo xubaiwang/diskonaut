@@ -1,8 +1,12 @@
-use ::tui::layout::Rect;
+use tui::layout::Rect;
 
-use crate::state::files::Folder;
-use crate::state::tiles::files_in_folder::FileType;
-use crate::state::tiles::{files_in_folder, FileMetadata, Tile, TreeMap};
+use crate::state::{
+    files::Folder,
+    tiles::{
+        FileMetadata, Tile, TreeMap,
+        files_in_folder::{FileType, files_in_folder},
+    },
+};
 
 pub struct Board {
     pub tiles: Vec<Tile>,

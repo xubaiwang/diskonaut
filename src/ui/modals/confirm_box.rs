@@ -1,10 +1,11 @@
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
-use ::tui::widgets::Widget;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+    widgets::Widget,
+};
 
-use crate::ui::format::truncate_middle;
-use crate::ui::grid::draw_filled_rect;
+use crate::ui::{format::truncate_middle, grid::draw_filled_rect};
 
 fn render_confirm_prompt(buf: &mut Buffer, confirm_rect: &Rect) {
     let text_style = Style::default()

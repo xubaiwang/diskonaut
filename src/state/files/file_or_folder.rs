@@ -1,9 +1,11 @@
-use ::std::collections::{HashMap, VecDeque};
-use ::std::ffi::OsString;
-use ::std::fs::Metadata;
-use ::std::path::PathBuf;
+use std::{
+    collections::{HashMap, VecDeque},
+    ffi::OsString,
+    fs::Metadata,
+    path::PathBuf,
+};
 
-use ::filesize::PathExt;
+use filesize::PathExt;
 
 #[derive(Debug, Clone)]
 pub enum FileOrFolder {

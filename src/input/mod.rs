@@ -1,3 +1,3 @@
-pub mod controls;
-
 pub use controls::*;
+
+pub mod controls;

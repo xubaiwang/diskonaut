@@ -1,3 +1,31 @@
+use std::{
+    env, io,
+    path::PathBuf,
+    process,
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+        mpsc::{self, Receiver, SyncSender},
+    },
+    thread::{self, park_timeout},
+    time,
+};
+
+use argh::FromArgs;
+use crossterm::{
+    event::{Event as BackEvent, KeyCode, KeyEvent, KeyModifiers},
+    terminal::{disable_raw_mode, enable_raw_mode},
+};
+use jwalk::{
+    Parallelism::{RayonDefaultPool, Serial},
+    WalkDir,
+};
+use tui::backend::{Backend, CrosstermBackend};
+
+use app::{App, UiMode};
+use input::TerminalEvents;
+use messages::{Event, Instruction, handle_events};
+
 #[cfg(test)]
 mod tests;
 
@@ -7,30 +35,6 @@ mod messages;
 mod os;
 mod state;
 mod ui;
-
-use ::jwalk::Parallelism::{RayonDefaultPool, Serial};
-use ::jwalk::WalkDir;
-use ::std::env;
-use ::std::io;
-use ::std::path::PathBuf;
-use ::std::process;
-use ::std::sync::Arc;
-use ::std::sync::atomic::{AtomicBool, Ordering};
-use ::std::sync::mpsc;
-use ::std::sync::mpsc::{Receiver, SyncSender};
-use ::std::thread::park_timeout;
-use ::std::{thread, time};
-use argh::FromArgs;
-
-use ::tui::backend::Backend;
-use crossterm::event::KeyModifiers;
-use crossterm::event::{Event as BackEvent, KeyCode, KeyEvent};
-use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
-use tui::backend::CrosstermBackend;
-
-use app::{App, UiMode};
-use input::TerminalEvents;
-use messages::{Event, Instruction, handle_events};
 
 #[cfg(not(test))]
 const SHOULD_SHOW_LOADING_ANIMATION: bool = true;

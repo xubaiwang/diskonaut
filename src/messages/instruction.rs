@@ -1,16 +1,16 @@
-use ::std::fs::Metadata;
-use ::std::path::PathBuf;
-use ::std::sync::mpsc::Receiver;
+use std::{fs::Metadata, path::PathBuf, sync::mpsc::Receiver};
 
-use ::tui::backend::Backend;
 use crossterm::event::Event as BackEvent;
+use tui::backend::Backend;
 
-use crate::input::{
-    handle_keypress_delete_file_mode, handle_keypress_error_message, handle_keypress_exiting_mode,
-    handle_keypress_loading_mode, handle_keypress_normal_mode, handle_keypress_screen_too_small,
-    handle_keypress_warning_message,
+use crate::{
+    App, UiMode,
+    input::{
+        handle_keypress_delete_file_mode, handle_keypress_error_message,
+        handle_keypress_exiting_mode, handle_keypress_loading_mode, handle_keypress_normal_mode,
+        handle_keypress_screen_too_small, handle_keypress_warning_message,
+    },
 };
-use crate::{App, UiMode};
 
 pub enum Instruction {
     SetPathToRed,

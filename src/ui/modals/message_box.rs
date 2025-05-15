@@ -1,12 +1,14 @@
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
-use ::tui::widgets::Widget;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+    widgets::Widget,
+};
 
-use crate::state::tiles::FileType;
-use crate::state::FileToDelete;
-use crate::ui::format::truncate_middle;
-use crate::ui::grid::draw_filled_rect;
+use crate::{
+    state::{FileToDelete, tiles::FileType},
+    ui::{format::truncate_middle, grid::draw_filled_rect},
+};
 
 fn truncated_file_name_line(file_to_delete: &FileToDelete, max_len: u16) -> String {
     let full_path = file_to_delete

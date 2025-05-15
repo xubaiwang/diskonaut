@@ -1,10 +1,11 @@
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
-use ::tui::widgets::Widget;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+    widgets::Widget,
+};
 
-use crate::ui::format::truncate_end;
-use crate::ui::grid::draw_filled_rect;
+use crate::ui::{format::truncate_end, grid::draw_filled_rect};
 
 pub struct ErrorBox<'a> {
     error_message: &'a str,

@@ -1,8 +1,10 @@
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
+use std::cmp::max;
 
-use ::std::cmp::max;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+};
 
 use crate::ui::format::truncate_middle;
 

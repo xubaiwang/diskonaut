@@ -1,17 +1,22 @@
-use ::std::env;
-use ::std::fs::{File, create_dir, create_dir_all, remove_dir_all};
-use ::std::io::prelude::*;
-use ::std::iter;
-use ::std::path::{Path, PathBuf};
+use std::{
+    env,
+    fs::{File, create_dir, create_dir_all, remove_dir_all},
+    io::prelude::*,
+    iter,
+    path::{Path, PathBuf},
+};
 
-use ::insta::assert_snapshot;
 use crossterm::event::KeyModifiers;
 use crossterm::event::{Event, KeyCode, KeyEvent};
+use insta::assert_snapshot;
 
-use crate::start;
-use crate::tests::cases::test_utils::*;
-use crate::tests::fakes::TerminalEvent::*;
-use crate::tests::fakes::TerminalEvents;
+use crate::{
+    start,
+    tests::{
+        cases::test_utils::*,
+        fakes::{TerminalEvent::*, TerminalEvents},
+    },
+};
 
 macro_rules! key {
     (char $x:expr) => {

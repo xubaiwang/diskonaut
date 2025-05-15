@@ -1,12 +1,17 @@
-use ::std::path::PathBuf;
-use ::tui::buffer::Buffer;
-use ::tui::layout::Rect;
-use ::tui::style::{Color, Modifier, Style};
-use ::tui::widgets::Widget;
+use std::path::PathBuf;
 
-use crate::ui::format::DisplaySize;
-use crate::ui::title::{CellSizeOpt, TitleTelescope};
-use crate::ui::FolderInfo;
+use tui::{
+    buffer::Buffer,
+    layout::Rect,
+    style::{Color, Modifier, Style},
+    widgets::Widget,
+};
+
+use crate::ui::{
+    FolderInfo,
+    format::DisplaySize,
+    title::{CellSizeOpt, TitleTelescope},
+};
 
 #[cfg(not(target_os = "windows"))]
 use crate::os::unix::is_user_admin;

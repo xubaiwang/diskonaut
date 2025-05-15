@@ -1,16 +1,21 @@
-use ::std::path::PathBuf;
-use ::tui::backend::Backend;
-use ::tui::layout::{Constraint, Direction, Layout, Rect};
-use ::tui::Terminal;
+use std::path::PathBuf;
 
-use crate::state::files::FileTree;
-use crate::state::tiles::Board;
-use crate::state::UiEffects;
-use crate::ui::grid::RectangleGrid;
-use crate::ui::modals::{ConfirmBox, ErrorBox, MessageBox, WarningBox};
-use crate::ui::title::TitleLine;
-use crate::ui::{BottomLine, TermTooSmall};
-use crate::UiMode;
+use tui::{
+    Terminal,
+    backend::Backend,
+    layout::{Constraint, Direction, Layout, Rect},
+};
+
+use crate::{
+    UiMode,
+    state::{UiEffects, files::FileTree, tiles::Board},
+    ui::{
+        BottomLine, TermTooSmall,
+        grid::RectangleGrid,
+        modals::{ConfirmBox, ErrorBox, MessageBox, WarningBox},
+        title::TitleLine,
+    },
+};
 
 pub struct FolderInfo<'a> {
     pub path: &'a PathBuf,

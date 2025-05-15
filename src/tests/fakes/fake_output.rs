@@ -1,9 +1,10 @@
-use ::std::collections::HashMap;
-use ::std::io;
-use ::std::sync::{Arc, Mutex};
-use ::tui::backend::Backend;
-use ::tui::buffer::Cell;
-use ::tui::layout::Rect;
+use std::{
+    collections::HashMap,
+    io,
+    sync::{Arc, Mutex},
+};
+
+use tui::{backend::Backend, buffer::Cell, layout::Rect};
 
 #[derive(Hash, Debug, PartialEq)]
 pub enum TerminalEvent {
