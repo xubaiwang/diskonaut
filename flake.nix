@@ -29,6 +29,10 @@
               pkg-config
               rustc
             ];
+            shellHook = ''
+              # handle space in path
+              export NIX_LDFLAGS="''${NIX_LDFLAGS/-rpath $out\/lib /}"
+            '';
           };
 
         packages.diskonaut = pkgs.rustPlatform.buildRustPackage {
