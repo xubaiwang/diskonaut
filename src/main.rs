@@ -21,7 +21,7 @@ use ::std::sync::mpsc::{Receiver, SyncSender};
 use ::std::sync::Arc;
 use ::std::thread::park_timeout;
 use ::std::{thread, time};
-use ::structopt::StructOpt;
+use argh::FromArgs;
 
 use ::tui::backend::Backend;
 use crossterm::event::KeyModifiers;
@@ -46,19 +46,33 @@ const SHOULD_SCAN_HD_FILES_IN_MULTIPLE_THREADS: bool = true;
 #[cfg(test)]
 const SHOULD_SCAN_HD_FILES_IN_MULTIPLE_THREADS: bool = false;
 
-#[derive(StructOpt, Debug)]
-#[structopt(name = "diskonaut")]
+/// Terminal disk space visual navigator
+#[derive(FromArgs)]
 pub struct Opt {
-    #[structopt(name = "folder", parse(from_os_str))]
-    /// The folder to scan
+    /// the folde to scan
+    #[argh(option)]
     folder: Option<PathBuf>,
-    #[structopt(short, long)]
-    /// Show file sizes rather than their block usage on disk
+    /// show file sizes rather than their block usage on disk
+    #[argh(switch, short = 'a')]
     apparent_size: bool,
-    #[structopt(short, long)]
-    /// Don't ask for confirmation before deleting
+    /// don't ask for confirmation before deleting
+    #[argh(switch, short = 'd')]
     disable_delete_confirmation: bool,
 }
+
+// #[derive(StructOpt, Debug)]
+// #[structopt(name = "diskonaut")]
+// pub struct Opt {
+//     #[structopt(name = "folder", parse(from_os_str))]
+//     /// The folder to scan
+//     folder: Option<PathBuf>,
+//     #[structopt(short, long)]
+//     /// Show file sizes rather than their block usage on disk
+//     apparent_size: bool,
+//     #[structopt(short, long)]
+//     /// Don't ask for confirmation before deleting
+//     disable_delete_confirmation: bool,
+// }
 
 fn main() {
     if let Err(err) = try_main() {
@@ -71,7 +85,7 @@ fn get_stdout() -> io::Result<io::Stdout> {
 }
 
 fn try_main() -> Result<(), failure::Error> {
-    let opts = Opt::from_args();
+    let opts: Opt = argh::from_env();
 
     match get_stdout() {
         Ok(stdout) => {
